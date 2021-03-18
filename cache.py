@@ -1,22 +1,27 @@
 from json import load,dump
+from os import write
 
-cache = {}
+class Cache:
 
-def loadCache():
-    global cache
-    with open("./db.json") as fp:
-        cache = load(fp)
+    def __init__(self,file) -> None:
+        self.file = file
+        self.loadCache()
 
-loadCache()
+    def loadCache(self):
+        with open(self.file,"r") as fp:
+            self.cache = load(fp)
 
-def writeCache():
-    global cache
-    with open("./db.json","w") as fp:
-        dump(cache,fp)
+    def writeCache(self):
+        with open(self.file,"w") as fp:
+            dump(self.cache,fp)
 
-def get(key):
-    return cache[key] if key in cache else None
+    def get(self,key):
+        return self.cache[key] if key in self.cache else None
 
-def put(key,value):
-    cache[key]=value
-    writeCache()
+    def put(self,key,value):
+        self.cache[key]=value
+        self.writeCache()
+
+    def clear(self):
+        self.cache = {}
+        self.writeCache()
