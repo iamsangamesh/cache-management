@@ -4,7 +4,7 @@ from cache import Cache
 class TranslatorCacheTest(unittest.TestCase): 
 
     def setUp(self): 
-        self.translator = Cache("translator.json")
+        self.translator = Cache("test_files/translator_test.json")
         self.translator.clear()
         self.translator.put("welcome to home","welcome home to")
   
