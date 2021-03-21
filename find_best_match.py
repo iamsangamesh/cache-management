@@ -2,11 +2,12 @@ import requests
 import threading 
 
 def getSimilarity(sentence_x,sentence_y,sentence_scores,threadLock):
-    data =  {
+    params =  {
     "text1": sentence_x,
-    "text2": sentence_y
+    "text2": sentence_y,
+    "token":"9bc923cfc260417daf46e1199092fd85"
     }
-    response = requests.post('https://www.twinword.com/api/text/similarity/latest/',data=data)
+    response = requests.get('https://www.twinword.com/api/text/similarity/latest/',params=params)
     resp = response.json()
     # handling critical section
     threadLock.acquire() # get lock
